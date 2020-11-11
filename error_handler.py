@@ -11,9 +11,20 @@ class ErrorHandler(ErrorListener):
 
         print(template.format(line, column, errorMsg))
 
-    def arrayError(line, name):
+    def arrayError(line, name, errorCode=1):
         template = "ArrayError: line:{}. {}"
-        errorMsg = "Size of array '{}' is negative or 0".format(name)
+
+        if errorCode == 1:
+            errorMsg = "Size of array '{}' is negative or 0".format(name)
+
+        elif errorCode == 2:
+            errorMsg = "Array '{}' it has a bad index".format(name)
+
+        print(template.format(line, errorMsg))
+
+    def attributeError(line, obj, attribute):
+        template = "AttributeError: line:{}. {}"
+        errorMsg = "'{}' object has no attribute '{}'".format(obj, attribute)
 
         print(template.format(line, errorMsg))
 
@@ -69,6 +80,10 @@ class ErrorHandler(ErrorListener):
 
         elif errorCode == 4:
             errorMsg = "'{}()' does not have the correct arguments"
+            errorMsg = errorMsg.format(value)
+
+        elif errorCode == 5:
+            errorMsg = "'{}' object is not subscriptable"
             errorMsg = errorMsg.format(value)
 
         print(template.format(line, errorMsg))

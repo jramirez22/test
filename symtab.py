@@ -1,17 +1,18 @@
 class Types():
     def __init__(self):
-        self.types = {
+        self.builtIn = ["int", "char", "boolean", "void"]
+        self.typeSize = {
             "int": 4,
             "char": 1,
             "boolean": 1,
-            "void": 0,
-            }
+            "void": 0
+        }
 
 
 class Type():
     def __init__(self, name, T):
         self.name = name
-        self.size = T.types.get(name)
+        self.size = T.typeSize.get(name)
 
     def isValid(self):
         if self.size is None:
@@ -51,7 +52,7 @@ class Scope():
     def resolve(self, name):
         symbol = self.symbols.get(name)
         if symbol is not None:
-            return Symbol
+            return symbol
 
         elif self.enclosingScope is not None:
             return self.enclosingScope.resolve(name)
@@ -77,7 +78,7 @@ class StructSymbol(Symbol, Scope):
     def resolve(self, name):
         symbol = self.symbols.get(name)
         if symbol is not None:
-            return Symbol
+            return symbol
 
         else:
             return False
